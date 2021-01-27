@@ -7,12 +7,11 @@ var MessagesView = {
   },
 
   render: function(messages) {
-    messages.forEach(message => {
-      message.username ??= 'anonymous'
-      message.text ??= '';
-      let data = MessageView.render(message);
-      this.$chats.append(data);
-    });
-  }
+    messages.forEach(message => MessagesView.renderMessage(message));
+  },
 
+  renderMessage: function({text = '', username = 'anonymous'} = {}) {
+    let data = MessageView.render({'text': text, 'username': username});
+    this.$chats.append(data);
+  }
 };

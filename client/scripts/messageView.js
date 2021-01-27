@@ -7,5 +7,3 @@ var MessageView = {
       </div>
     `)
 };
-
-// render({message: data});

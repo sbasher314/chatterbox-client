@@ -9,7 +9,9 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-    
+    let message = FormView.$form.find('#message');
+    //send message to server ---
+    Parse.create(/* fill this in */);
     console.log('click!');
   },
 
