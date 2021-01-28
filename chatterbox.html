@@ -27,11 +27,13 @@
       <div class="spinner"><img src="client/images/spiffygif_46x46.gif"></div>
       <div id="rooms">
         Room:
-        <select></select>
+        <input list="" name="message" id="roomSelect" placeholder="lobby" autocomplete="off"/>
+        <datalist id="roomsList"></datalist>
         <button>Add Room</button>
       </div>
       <form action="#" id="send" method="post">
         <input type="text" name="message" id="message"/>
+
         <input type="submit" name="submit" class="submit"/>
       </form>
     </div>

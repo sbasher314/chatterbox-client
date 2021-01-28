@@ -8,6 +8,6 @@ var MessageView = {
     `),
 
   format: function({text = '', username = 'anonymous', roomname = 'lobby'} = {}) {
-    return {'text': text, 'username': username, 'roomname': roomname};
+    return {'text': text.trim(), 'username': username, 'roomname': roomname};
   }
 };

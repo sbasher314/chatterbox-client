@@ -75,9 +75,25 @@ describe('chatterbox', function() {
       expect($('#chats').children().length).to.equal(1);
     });
 
-    it('should be able to add rooms to the DOM', function() {
-      RoomsView.renderRoom('superLobby');
-      expect($('#rooms select').children().length).to.equal(1);
+    it('should be able to add rooms to the available selections', function() {
+      Rooms.createRoom('superLobby');
+      expect($('#roomsList').children().length).to.equal(1);
+    });
+
+    it('should be able to show rooms and their respective messages to the DOM', function() {
+      // !! ToDo -- create a few dummy messages, test if they can be filtered and added to chats properly
+      let messages = [
+        {'username': 'bob', 'text': 'blah', 'roomname': 'the room'},
+        {'username': 'bob', 'text': 'blee', 'roomname': 'not the room'},
+        {'username': 'bob', 'text': 'bloo', 'roomname': 'another room'},
+        {'username': 'bob', 'text': 'blay', 'roomname': 'the room'},
+      ];
+      RoomsView.renderRoom('the room', messages);
+      expect($('#chats').children().length).to.equal(2);
+      RoomsView.renderRoom('not the room', messages);
+      expect($('#chats').children().length).to.equal(1);
+      RoomsView.renderRoom('A nonexistent room!', messages);
+      expect($('#chats').children().length).to.equal(0);
     });
 
   });
@@ -99,16 +115,16 @@ describe('chatterbox', function() {
     });
 
     it('should add a room when clicking add', function() {
-      sinon.spy(Rooms, 'add');
+      sinon.spy(Rooms, 'createRoom');
       var prompt = window.prompt;
       window.prompt = sinon.stub().returns('testroom');
 
       App.initialize();
       $('#rooms').find('button').trigger('click');
-      expect(Rooms.add.called).to.be.true;
+      expect(Rooms.createRoom.called).to.be.true;
 
       window.prompt = prompt;
-      Rooms.add.restore();
+      Rooms.createRoom.restore();
     });
 
     it('should try to send a message upon clicking submit', function() {

@@ -19,8 +19,9 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
       MessagesView.render(data.results);
+      Rooms.populateRooms(data.results);
+      Messages = data;
       callback();
     });
   },
@@ -28,7 +29,6 @@ var App = {
   update: function() {
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
   },
 
   startSpinner: function() {
@@ -38,6 +38,7 @@ var App = {
 
   stopSpinner: function() {
     App.$spinner.fadeOut('fast');
-    FormView.setStatus(false);
+    //We don't want the user to be able to post empty messages
+    //FormView.setStatus(false);
   }
 };

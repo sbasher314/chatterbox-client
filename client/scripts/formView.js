@@ -4,23 +4,37 @@ var FormView = {
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
+    FormView.$form.find('#message').on('change keyup cut paste mouseup',
+      (e) => setTimeout(() => FormView.handleTextUpdate(e), 10));
+    $('rooms').find('button').on('click', FormView.handleAddRoom);
   },
 
 
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-    let submitButton = FormView.$form.find('.submit');
     let messageBox = FormView.$form.find('#message');
-    let selectedRoom = $('#rooms').find('select').val();
-    let message = {'text': messageBox.val(), 'username': App.username, 'room': selectedRoom};
-    submitButton.attr('disabled', 'disabled');
-    setTimeout(() => { submitButton.removeAttr('disabled'); }, 1000);
+    let selectedRoom = $('#roomSelect').val();
+    let message = {'text': messageBox.val(), 'username': App.username, 'roomname': selectedRoom};
     //send message to server ---
-    Parse.create(MessageView.format(message), () => {
-      App.update();
-      messageBox.val('');
-    });
+    if (message.text !== '') {
+      FormView.setStatus(true);
+      setTimeout(() => FormView.setStatus(false), 1000);
+      Parse.create(MessageView.format(message), () => {
+        App.update();
+        messageBox.val('');
+      });
+    }
+
+  },
+
+  handleTextUpdate: function(event) {
+    var text = FormView.$form.find('#message').val();
+    FormView.setStatus(text.trim() === '');
+  },
+
+  handleAddRoom: function(roomname) {
+
   },
 
   setStatus: function(active) {

@@ -88,3 +88,16 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+datalist {
+    position: absolute;
+    background-color: lightgrey;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+  }
+
+  option {
+    background-color: #eee;
+    padding: 4px;
+    margin-bottom: 1px;
+    cursor: pointer;
+  }
