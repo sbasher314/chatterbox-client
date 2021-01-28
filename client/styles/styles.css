@@ -57,6 +57,8 @@ form input[type=text] {
     width: 70%;
     font-size: 12px;
     padding: 5px;
+    border-width: 1px;
+    border-radius: 4px;
 }
 
 .chat {
@@ -90,14 +92,79 @@ form input[type=text] {
 
 datalist {
     position: absolute;
-    background-color: lightgrey;
-    font-family: sans-serif;
+    background-color: white;
+    font-family: Tahoma;
     font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px #3339;
+    padding: 16px 0;
   }
 
-  option {
-    background-color: #eee;
-    padding: 4px;
-    margin-bottom: 1px;
+  datalist option {
+    padding: 8px;
     cursor: pointer;
   }
+
+  datalist option:hover {
+      background-color: #bbb;
+  }
+
+  input[type="text"] {
+    outline: none;
+    box-shadow: 0px -0px 0px #069 inset;
+    transition: box-shadow 0.1s;
+  }
+
+  #roomSelect {
+    height: 24px;
+    padding: 4px;
+    margin-right: 16px;
+    padding-right: 24px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #999;
+  }
+
+  #roomSelect:hover {
+    border-color: #666;
+  }
+
+  #roomSelect:focus, form input[type="text"]:focus {
+      outline:none;
+      box-shadow: 0px -1px #069 inset;
+  }
+
+
+
+  [list]::-webkit-calendar-picker-indicator {
+      display: none;
+      visibility: hidden;
+  }
+
+  button.dropdown {
+    all: unset;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    width: 22px;
+    height: 22px;
+    margin-top:1px;
+    position: absolute;
+    margin-left: -43px;
+    padding: 2px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    text-align: center;
+    z-index:12;
+    color: #eee;
+    text-shadow: 0px 0px 2px #333;
+  }
+
+  button.dropdown:hover, button.dropdown.dropdownVisible {
+      background: #06f9;
+  }
+
