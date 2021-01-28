@@ -5,5 +5,9 @@ var MessageView = {
         <div class="username"><%- username %></div>
         <div><%- text %></div>
       </div>
-    `)
+    `),
+
+  format: function({text = '', username = 'anonymous', roomname = 'lobby'} = {}) {
+    return {'text': text, 'username': username, 'roomname': roomname};
+  }
 };
