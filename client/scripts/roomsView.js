@@ -7,7 +7,6 @@ var RoomsView = {
   initialize: function() {
     RoomsView.$select.on('focus', () => RoomsView.roomSelectHandler('show'));
     RoomsView.$select.on('blur', () => RoomsView.roomSelectHandler('hide'));
-    RoomsView.$button.on('click mousedown mouseup', () => Rooms.createRoom(RoomsView.$select.val()));
   },
 
   render: function() {
