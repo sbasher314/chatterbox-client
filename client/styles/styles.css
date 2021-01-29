@@ -67,8 +67,16 @@ form input[type=text] {
     background-color: #eee;
 }
 
-.chat .username {
+.chat .username a {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
     font-weight: 800;
+}
+
+.chat .username a:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .chat:hover {
@@ -99,11 +107,11 @@ datalist {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 2px 4px #3339;
-    padding: 16px 0;
+    padding: 8px 0;
   }
 
   datalist option {
-    padding: 8px;
+    padding: 12px;
     cursor: pointer;
   }
 

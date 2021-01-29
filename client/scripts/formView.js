@@ -6,7 +6,7 @@ var FormView = {
     FormView.$form.on('submit', FormView.handleSubmit);
     FormView.$form.find('#message').on('change keyup cut paste mouseup',
       (e) => setTimeout(() => FormView.handleTextUpdate(e), 10));
-    $('rooms').find('button').on('click mousedown mouseup', FormView.handleAddRoom);
+    $('#rooms').find('button').on('click mousedown mouseup', FormView.handleAddRoom);
   },
 
 
@@ -33,8 +33,8 @@ var FormView = {
     FormView.setStatus(text.trim() === '');
   },
 
-  handleAddRoom: function(roomname) {
-    Rooms.createRoom(roomname ?? RoomsView.$select.val());
+  handleAddRoom: function(event) {
+    Rooms.createRoom(RoomsView.$select.val());
   },
 
   setStatus: function(active) {
