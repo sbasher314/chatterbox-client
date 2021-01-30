@@ -12,22 +12,25 @@ var App = {
 
     // Fetch initial batch of messages
     App.update();
-
   },
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      MessagesView.render(data.results);
+      RoomsView.renderRoom('lobby', data);
       Rooms.populateRooms(data.results);
       Messages = data;
       callback();
     });
   },
 
-  update: function() {
+  update: function(state, roomname) {
     App.startSpinner();
-    App.fetch(App.stopSpinner);
+    if (state === 'submit') {
+      RoomsView.renderRoom(roomname, undefined, App.stopSpinner);
+    } else {
+      App.fetch(App.stopSpinner);
+    }
   },
 
   startSpinner: function() {

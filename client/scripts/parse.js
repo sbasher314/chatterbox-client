@@ -30,6 +30,24 @@ var Parse = {
         console.error('chatterbox: Failed to fetch messages', error);
       }
     });
-  }
+  },
 
+  readRoom: function(roomname, successCB = () => {}, messages) {
+    if (messages === undefined) {
+      Parse.readAll((data) => {
+        Messages = data;
+        successCB(Parse.readRoom(roomname, () => {}, data));
+      });
+    } else {
+      let roomMessages = [];
+      messages.results.forEach((message) => {
+        message = MessageView.format(message);
+        if (MessageView.format(message).roomname === roomname) {
+          roomMessages.push(message);
+        }
+      });
+      successCB(roomMessages);
+      return roomMessages;
+    }
+  }
 };

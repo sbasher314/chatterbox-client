@@ -21,7 +21,7 @@ var FormView = {
       FormView.setStatus(true);
       setTimeout(() => FormView.setStatus(false), 1000);
       Parse.create(MessageView.format(message), () => {
-        App.update();
+        App.update('submit', selectedRoom);
         messageBox.val('');
       });
     }

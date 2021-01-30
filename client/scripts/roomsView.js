@@ -17,9 +17,8 @@ var RoomsView = {
   render: function() {
   },
 
-  renderRoom: function(roomname, data = Messages.results) {
-    let messages = Rooms.filterRoom(roomname, data);
-    MessagesView.render(messages);
+  renderRoom: function(roomname, messages, callback = () => {}) {
+    Parse.readRoom(roomname, (response) => { callback(); MessagesView.render(response); }, messages);
   },
 
   roomSelectHandler: function(e = {'which': 0, 'type': 'none'}, visibility) {

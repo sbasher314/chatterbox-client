@@ -88,11 +88,11 @@ describe('chatterbox', function() {
         {'username': 'bob', 'text': 'bloo', 'roomname': 'another room'},
         {'username': 'bob', 'text': 'blay', 'roomname': 'the room'},
       ];
-      RoomsView.renderRoom('the room', messages);
+      RoomsView.renderRoom('the room', {'results': messages});
       expect($('#chats').children().length).to.equal(2);
-      RoomsView.renderRoom('not the room', messages);
+      RoomsView.renderRoom('not the room', {'results': messages});
       expect($('#chats').children().length).to.equal(1);
-      RoomsView.renderRoom('A nonexistent room!', messages);
+      RoomsView.renderRoom('A nonexistent room!', {'results': messages});
       expect($('#chats').children().length).to.equal(0);
     });
 
@@ -137,5 +137,22 @@ describe('chatterbox', function() {
 
       Parse.create.restore();
     });
+  });
+
+  describe('Advanced Content', function() {
+
+    it('should have a Parse query that returns only messages from a certain room', function(done) {
+      App.initialize();
+      let messages = [
+        {'username': 'bob', 'text': 'blah', 'roomname': 'the room'},
+        {'username': 'bob', 'text': 'blee', 'roomname': 'not the room'},
+        {'username': 'bob', 'text': 'bloo', 'roomname': 'another room'},
+        {'username': 'bob', 'text': 'blay', 'roomname': 'the room'},
+      ];
+      let responseRoom = Parse.readRoom('the room', () => {}, {'results': messages});
+      expect(responseRoom.length).to.equal(2);
+      done();
+    });
+
   });
 });

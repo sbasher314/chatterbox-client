@@ -13,15 +13,5 @@ var Rooms = {
     RoomsView.populateSelectBox();
   },
   currentRoom: {},
-  filterRoom: function(roomname, data = Messages.results) {
-    let roomMessages = [];
-    data.forEach((message) => {
-      message = MessageView.format(message);
-      if(MessageView.format(message).roomname === roomname) {
-        roomMessages.push(message);
-      }
-    });
-    return roomMessages;
-  }
 
 };
